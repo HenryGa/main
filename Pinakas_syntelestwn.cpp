@@ -31,16 +31,14 @@ void Pinakas_syntelestwn<T>::print_Table(){
 template < typename T>
 void Pinakas_syntelestwn<T>::create_Polywnymo( int vathmosPolywnymou ) {
 
-    srand ( (unsigned int) time(NULL) );
-
-    this->allocate_Table( vathmosPolywnymou , vathmosPolywnymou );
+    this->allocate_Table( vathmosPolywnymou+1 , vathmosPolywnymou+1 );
 
     int x , y;
     int c; // pairnei times apo -MAXFACTOR/2 mexri (MAXFACTOR-1) / 2
 
-    for ( x = 0 ; x < vathmosPolywnymou  ; x ++)
+    for ( x = 0 ; x <= vathmosPolywnymou  ; x ++)
     {
-        for ( y = 0 ; y < vathmosPolywnymou ; y ++)
+        for ( y = 0 ; y <= vathmosPolywnymou ; y ++)
         {
 
             c = rand() % MAXFACTOR;
@@ -55,7 +53,7 @@ void Pinakas_syntelestwn<T>::create_Polywnymo( int vathmosPolywnymou ) {
 
             }
 
-            if ( x + y > vathmosPolywnymou-1 )
+            if ( x + y > vathmosPolywnymou )
             {
                 this->insert(0,x,y);
                 continue;

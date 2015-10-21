@@ -10,22 +10,29 @@
 template <typename T>
 class Sylvester : public Matrix<T> {
 
+    int m1grammes;
+    int m2grammes;
+    int m1sthles;
+    int m2sthles;
+
 public:
 
     ~Sylvester();
 
     void print_Table();
-    void print_Table(char variable, int m1Sthles, int m2Sthles, int d1);
+    void print_Table(char variable);
 
     void make_Sylvester(Matrix<int> &m1, Matrix<int> &m2, int d0, int d1);
 
     void fill_first_row_of_sylvester(Matrix<int> &m1, int first_row_pos, int dimension0);
 
-    void shift_rest_first_half(int dimension1);
+    void shift_rest_first_half();
 
-    void shift_rest_second_half(int dimension1);
+    void shift_rest_second_half();
 
     int get_vathmos(){return this->grammes;}
+
+    int** multiply(Matrix<int> &v);
 };
 
 

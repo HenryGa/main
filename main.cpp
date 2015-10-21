@@ -6,40 +6,47 @@ using namespace std;
 
 int main()
 {
+	srand ( (unsigned int) time(NULL) );
 	int d0 ;
 	int d1 ;
 
-	//Read_d1_d2_From_File( (char *) "d1d2.txt" , &d1 , &d2);
-
-//	Matrix<int> m1, m2;
 	Pinakas_syntelestwn<int> m1,m2;
 
-	char hidden_variable;
-	hidden_variable = Read_synarthsh_from_file((char *) "generated_functions.txt" , m1, m2);
-
-	if ( hidden_variable == 'x' ){
-		m1.reverse();
-		m2.reverse();
-		d0 = m1.get_maxYpower();
-		d1 = m2.get_maxYpower();
-	}
-	else{
-		d0 = m1.get_maxXpower();
-		d1 = m2.get_maxXpower();
-	}
-
-	m1.print_Table();
-	cout << endl;
-	m2.print_Table();
-	cout << endl;
-
 	Sylvester<int *> Sylvester;
-//
-//	m1.create_Polywnymo(d1 + 1);
-//	m2.create_Polywnymo(d2 + 1);
 
-	Sylvester.allocate_Table(d0 + d1 , d0 + d1  );
+	// diavasma apo arxeio
+
+//	char hidden_variable;
+//	hidden_variable = Read_synarthsh_from_file((char *) "generated_functions.txt" , m1, m2);
+//
+//	if ( hidden_variable == 'x' ){
+//		m1.reverse();
+//		m2.reverse();
+//		d0 = m1.get_maxYpower();
+//		d1 = m2.get_maxYpower();
+//	}
+//	else{
+//		d0 = m1.get_maxXpower();
+//		d1 = m2.get_maxXpower();
+//	}
+
+	//------------------------
+
+
+	//diavasma d1 d2 apo arxeio
+
+	Read_d1_d2_From_File( (char *) "d1d2.txt" , &d0 , &d1);
+	char hidden_variable = 'y';
+	m1.create_Polywnymo(d0);
+	m2.create_Polywnymo(d1);
+
+	//-----------------------
+
+
+	Sylvester.allocate_Table(d0 + d1 , d0 + d1 );
 	Sylvester.make_Sylvester(m1,m2 , d0 ,d1);
+
+	//paragwgh polywnymou mhtrwwn
 
 	Polywnymo_mhtrwwn< Matrix<int*> *> Polywnymo_Mhtrwwn;
 
@@ -47,15 +54,37 @@ int main()
 
 	Polywnymo_Mhtrwwn.print_Table();
 
+	//----------------------------
+
 	/*
 	 * 2o orisma = plh8os sthles pou einai grammeno to polywnymo 1
 	 * 3o orisma = plh8os sthles pou einai grammeno to polywnymo 2
 	 */
-	if( hidden_variable == 'y')
-		Sylvester.print_Table( hidden_variable, m1.get_maxYpower() + 1 , m2.get_maxYpower() +1 ,d1 );
-	else
-		Sylvester.print_Table( hidden_variable, m1.get_maxXpower() + 1  , m2.get_maxXpower() +1 ,d1);
+	//ektypwseis
+	m1.print_Table();
 	cout << endl;
+	m2.print_Table();
+	cout << endl;
+	if( hidden_variable == 'y')
+		Sylvester.print_Table( hidden_variable);
+	else
+		Sylvester.print_Table( hidden_variable);
+	cout << endl;
+
+	//------------------------------------------------------------
+
+	int ** result;
+	Pinakas_syntelestwn <int> v;
+
+	v.allocate_Table(1,d0+1);
+
+	for (int i = 0; i < d0+1; ++i) {
+		v.insert(i+1,0,i);
+	}
+
+
+	result = Sylvester.multiply(v);
+
 
 //	m1.print_Table();
 //	cout << endl;

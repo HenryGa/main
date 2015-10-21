@@ -36,6 +36,8 @@ public:
 
     int * get_element(int i ,int j ) { return &table[i][j]; }
 
+    int get_int_element(int i ,int j ) { return table[i][j]; }
+
     int * get_table_pos(int x,int y) { return table[x][y]; }
 
     int * get_table_row( int row ) { return table[row]; }
