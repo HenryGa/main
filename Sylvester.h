@@ -32,7 +32,7 @@ public:
 
     int get_vathmos(){return this->grammes;}
 
-    int** multiply(Matrix<int> &v);
+    int*** multiply(Matrix<int> & v,int maxSthles,int minSthles);
 };
 
 

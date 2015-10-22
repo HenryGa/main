@@ -6,6 +6,10 @@
 
 using namespace std;
 
+
+/*
+ * Desmeush mnhmhs gia ton pinaka
+ */
 template <typename T>
 void Matrix<T> :: allocate_Table(int plh8osGrammes , int plh8osSthles ) {
 

@@ -25,12 +25,12 @@ int main(){
     myfile.open ("generated_functions.txt");
 
     char buffer[BUFFSIZE];
-
+    int flag = 0,flag1=0;
     int syntelesths , plh8osOrwn;
 
     char proshmo , metavlhth;
 
-    int flag = 0;
+    
 
     int exwX = 0,exwY = 0;
 
@@ -50,7 +50,8 @@ int main(){
             //---------------------
 
             for (int i = 0; i < plh8osOrwn; ++i) {
-
+                
+                
                 //eisagwgei syntelesth
                 syntelesths = generate_syntelesth();
 
@@ -81,7 +82,13 @@ int main(){
                         exwX = 1;
                     else
                         exwY = 1;
-
+                
+                if((i==0) && (syntelesths==0))
+                {
+                    while( syntelesths == 0 )
+                        syntelesths = generate_dynamh();
+                }
+                
                 snprintf(buffer, sizeof(buffer), "%d", syntelesths);
 
                 myfile << buffer;
@@ -100,11 +107,14 @@ int main(){
 
                 //eisagwgh dynamhs
                 syntelesths = generate_dynamh();
+                if(( syntelesths == 0) && (flag1==0))
+                    flag1=1;
 
-                if ( flag == 1 )
+                if (( flag1 == 1 ) || (flag == 1)){
                     while( syntelesths == 0 )
                         syntelesths = generate_dynamh();
-
+                    
+                }
                 if(syntelesths != 0)
                     if ( metavlhth == 'x' )
                         exwX = 1;

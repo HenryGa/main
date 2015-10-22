@@ -1,7 +1,7 @@
 all: main generate
 
-main: main.cpp Matrix.o Polywnymo_mhtrwwn.o Pinakas_syntelestwn.o Sylvester.o Pinakas_polywnymou_mhtrwwn.o
-	g++ -o main Matrix.o Polywnymo_mhtrwwn.o Pinakas_syntelestwn.o Sylvester.o Pinakas_polywnymou_mhtrwwn.o main.cpp main.hpp  -g3 
+main: main.cpp Matrix.o Polywnymo_mhtrwwn.o Pinakas_syntelestwn.o Sylvester.o Pinakas_polywnymou_mhtrwwn.o Handler.o
+	g++ -o main Matrix.o Handler.o Polywnymo_mhtrwwn.o Pinakas_syntelestwn.o Sylvester.o Pinakas_polywnymou_mhtrwwn.o main.cpp main.hpp  -g3
 
 Matrix.o: Matrix.cpp
 	g++ -c Matrix.cpp Matrix.h
@@ -21,5 +21,8 @@ Pinakas_polywnymou_mhtrwwn.o:Pinakas_polywnymou_mhtrwwn.cpp
 Sylvester.o: Sylvester.cpp
 	g++ -c Sylvester.cpp Sylvester.h
 
+Handler.o: Handler.cpp
+	g++ -c Handler.cpp Handler.h
+
 clean:
-	rm -f *.o main
+	rm -f *.o main generate *.gch generated_functions.txt

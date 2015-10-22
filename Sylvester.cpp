@@ -12,6 +12,7 @@ Sylvester<T>::~Sylvester(){
     for (int i = 0; i < this->grammes; ++i) {
         delete[] this->table[i];
     }
+    delete[] this->table;
 }
 
 
@@ -22,67 +23,65 @@ Sylvester<T>::~Sylvester(){
  */
 
 template < typename T >
-int** Sylvester <T> :: multiply(Matrix<int> & v){
+int *** Sylvester <T> :: multiply(Matrix<int> & v,int Sthles0,int Sthles1){
 
-    int vSthles = v.get_sthles();
+    int vGrammes = v.get_grammes();
     int sylv_grammes = this->get_grammes();
-    int sylv_sthles = this->get_sthles();
+    int maxSthles;
+    if(Sthles0>Sthles1)
+        maxSthles=Sthles0;
+    else
+        maxSthles=Sthles1;
 
-    int ** result = (int **) new int*[sylv_grammes];
-
-    for (int k = 0; k < sylv_grammes; ++k) {
-        result[k] = new int[sylv_sthles];
-    }
-
-    for (int l = 0; l < sylv_grammes; ++l) {
-        for (int k = 0; k < sylv_sthles; ++k) {
-            result[l][k] = 0;
+    int *** result = new int**[sylv_grammes];
+    for (int p = 0; p < sylv_grammes; p++) {
+        result[p] = new int*[sylv_grammes];
+        for (int t= 0; t< sylv_grammes; t++){
+            result[p][t]=new int[maxSthles];
+            for(int c=0;c<maxSthles;c++)
+                result[p][t][c]=0;
         }
     }
 
+    int flag=0;
     // ftiaxnw prwth grammh
-    for (int m = 0; m <sylv_sthles ; ++m) {
+    cout <<"result" << endl;
+    for (int i = 0; i <sylv_grammes ; ++i) {
+        for (int j = 0; j <sylv_grammes ; ++j) {
 
-        if( this->table[0][m] != NULL )
-            for (int i = 0; i < vSthles; ++i) {
-                result[0][i] += this->table[0][m][i] * v.get_int_element(0, m);
-                cout << this->table[0][m][i] << " " <<  v.get_int_element(0, m);
-                getchar();
+            if( (i>0) && (this->table[i][0] != NULL) )
+                flag=1;
+
+            if(flag==0){
+                if( this->table[i][j] != NULL ){
+                    for (int m = 0; m < Sthles0; ++m) {
+                        result[i][j][m] = this->table[i][j][m] * v.get_int_element(j, 0);
+                        cout << result[i][j][m] << " " ;
+                 //       getchar();
+                    }
+                }
+               // else{
+               //     for (int m = 0; m < Sthles0; ++m)
+               //         result[i][j][m]=;
+               // }
+                    
             }
-    }
-
-    //kanw shift()
-    for (int n = 1; n < m2grammes-1; ++n) {
-        for (int i = 1; i < sylv_sthles; ++i) {
-            result [n][i] = result[n-1][i-1];
+            else{
+                if( this->table[i][j] != NULL ){
+                    for (int m = 0; m < Sthles1; ++m) {
+                        result[i][j][m] = this->table[i][j][m] * v.get_int_element(j, 0);
+                        cout << result[i][j][m] << " ";
+                   //     getchar();
+                    }               
+                }
+                else{
+                    for (int m = 0; m < Sthles0; ++m)
+                        result[i][j][m]=0;
+                }
+            }   
+            cout << "     ";
         }
-    }
-    //-------------
-
-
-    // ftiaxnw prwth grammh m2
-    for (int m = 0; m < sylv_sthles ; ++m) {
-
-        if( this->table[m2grammes-1][m] != NULL )
-            for (int i = 0; i < vSthles; ++i) {
-                result[m2grammes-1][i] += this->table[m2grammes-1][m][i] * v.get_int_element(0, m);
-            }
-    }
-
-    //kanw shift()
-    for (int n = m2grammes ; n < sylv_grammes; ++n) {
-        for (int i = 1; i < sylv_sthles; ++i) {
-            result [n][i] = result[n-1][i-1];
-        }
-    }
-    //-------------
-
-
-    for (int i = 0; i < sylv_grammes; ++i) {
-        for (int  j= 0;  j < sylv_sthles; ++j) {
-            cout << result[i][j] << " ";
-        }
-        putchar('\n');
+        cout <<'\n';
     }
 
     return result;

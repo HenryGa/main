@@ -21,6 +21,8 @@ public:
 
     virtual void print_Table();
 
+    void print_Table(int num);
+
     void generate(Matrix<int> &m1 , Matrix<int> &m2);
 
 };

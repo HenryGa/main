@@ -11,8 +11,21 @@ using namespace std;
 template <typename T>
 Polywnymo_mhtrwwn<T>::~Polywnymo_mhtrwwn(){
 
-    delete[] this->table;
+//    cout << "\n edw\n" ; getchar();
 
+    for (int i = 0; i < this->sthles; ++i) {
+        delete this->table[0][i] ;
+    }
+    delete this->table[0];
+    delete this->table;
+}
+
+template <typename T>
+void Polywnymo_mhtrwwn<T>::print_Table(int num){
+
+        cout << "A["<<num<<"] = \n";
+        this->table[0][num]->print_Table();
+        cout << endl;
 }
 
 template <typename T>

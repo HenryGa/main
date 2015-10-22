@@ -9,6 +9,8 @@ Pinakas_syntelestwn<T>::~Pinakas_syntelestwn(){
     for (int i = 0; i < this->grammes; ++i) {
         delete[] this->table[i];
     }
+    delete[] this->table;
+
 }
 
 template <typename T>
@@ -43,9 +45,8 @@ void Pinakas_syntelestwn<T>::create_Polywnymo( int vathmosPolywnymou ) {
 
             c = rand() % MAXFACTOR;
 
-            // sta8eros oros kai megistova8mios den mproun na exoun syntelesth 0
-            //if ( (x == 0 && y == 0) || ( ( x + y ) == vathmosPolywnymou ) )
-            if ( (x == 0 && y == 0) )
+            // sta8eros oros den mporei na exei syntelesth 0
+            if ( (x == 0 && y == 0)  )
             {
 
                 while ( c == 0 )
@@ -53,7 +54,7 @@ void Pinakas_syntelestwn<T>::create_Polywnymo( int vathmosPolywnymou ) {
 
             }
 
-            if ( x + y > vathmosPolywnymou )
+            if ( x + y > vathmosPolywnymou ) // ean eimai panw apo to miso tou pinaka vale mhden
             {
                 this->insert(0,x,y);
                 continue;

@@ -105,15 +105,14 @@ void Pinakas_polywnymou_mhtrwwn<T>::generate_Mhtrwo( Matrix<int > & m1 , Matrix<
 
 }
 
-
-
 template <typename T>
 Pinakas_polywnymou_mhtrwwn<T>::~Pinakas_polywnymou_mhtrwwn() {
+
 
     for (int i = 0; i < this->grammes; ++i) {
         delete[] this->table[i];
     }
-    delete this->table;
+    delete[] this->table;
 
 
 }
